@@ -7,7 +7,7 @@
   --font-s: 0.8rem;
   --font-m: 1rem;
   --font-xm: 1.5rem;
-  --font-l: 2;
+  --font-l: 2rem;
   --font-xl: 5rem;
   --text-color: #fff;
   --subtext-color: #d4d4d4;
@@ -17,6 +17,28 @@
   --bg-color: var(--dark-grey);
 }
 
+h2 {
+    font-size: 2.5rem;
+    margin-bottom: 50px;
+}
+
+h2::after {
+    content: '_';
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+}
+
 /*
   1. Use a more-intuitive box-sizing model.
 */
@@ -24,6 +46,7 @@
 *::before,
 *::after {
   box-sizing: border-box;
+  scroll-margin: 50px;
 }
 /*
     2. Remove default margin

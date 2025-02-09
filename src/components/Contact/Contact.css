@@ -2,6 +2,11 @@
   min-height: fit-content;
 }
 
+#contact > h2{
+    margin-top: 50px;
+    text-align: center;
+}
+
 form {
   max-width: 800px;
   width: 100%;

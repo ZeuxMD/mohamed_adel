@@ -4,10 +4,12 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-direction: row;
 }
 
 .introductionContainer {
   height: 50%;
+  width: 50%;
 }
 
 .heroHeading {
@@ -29,4 +31,40 @@
 .imageContainer > img {
   border-radius: 10px;
   box-shadow: 8px 12px 3px rgba(0, 0, 0, 0.5);
+}
+
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    text-align: center;
+    padding: 20px;
+  }
+
+  .introductionContainer {
+    width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+  }
+
+  .heroHeading {
+    font-size: var(--font-l); 
+  }
+
+  .heroSubtext {
+    max-width: 100%;
+  }
+
+  .imageContainer {
+    width: 70%; 
+    margin: 0 auto; 
+  }
+}
+
+@media (max-width: 480px) {
+    .header{
+        min-height: 80vh;
+    }
+    .imageContainer {
+        width: 90%; 
+    }
 }

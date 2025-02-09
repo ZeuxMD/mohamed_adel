@@ -1,6 +1,7 @@
 .nav {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding-inline: 40px;
   border-radius: 40px;
   backdrop-filter: blur(20px);
@@ -8,9 +9,10 @@
   position: sticky;
   top: 20px;
   margin-top: 30px;
+  z-index: 1000;
 }
 
-.nav ul {
+.navList {
   list-style-type: none;
   display: flex;
   align-items: center;
@@ -31,4 +33,50 @@
 .navBtn.active,
 .navBtn:hover {
   color: var(--green-300);
+}
+
+.hamburgerButton {
+  display: none; 
+  background: none;
+  border: none;
+  color: var(--text-color);
+  font-size: 2rem;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .nav {
+    padding-inline: 10px; 
+  }
+
+  .navList {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: rgba(34, 34, 34, 0.95); 
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1rem;
+    display: none; 
+    border-radius: 0 0 40px 40px;
+  }
+
+  .navList.active {
+    display: flex; 
+  }
+
+  .navBtn {
+    padding-inline: 1rem;
+    padding-block: 0.5rem;
+    text-align: left;
+    display: block;
+    width: 100%; 
+  }
+
+  .hamburgerButton {
+    display: block; 
+  }
 }

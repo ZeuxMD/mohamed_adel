@@ -1,0 +1,110 @@
+.projects {
+    padding: 2rem;
+    text-align: center;
+}
+
+.projectsContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: stretch;
+    gap: 2rem;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.projectCard {
+    min-width: 250px;
+    width: 350px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    text-align: left;
+    transition: all 0.4s;
+    background-color: #333;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    color: #fff;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.projectCard img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.descriptionContainer {
+    flex-grow: 1;
+}
+
+.projectCard h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    color: var(--green-300);
+}
+
+.projectCard p {
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    color: var(--subtext-color);
+}
+
+.techStack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.techTag {
+    font-family: monospace;
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+    background-color: rgba(23, 216, 133, 0.1);
+    border-radius: 4px;
+}
+
+.projectLinks a {
+    display: inline-block;
+    margin-right: 10px;
+    color: var(--text-color);
+    text-decoration: none;
+    padding: 8px 12px;
+    border: 1px solid var(--green-300);
+    border-radius: 5px;
+    background-color: rgba(var(--text-color), 0.1);
+    transition: background-color 0.3s ease;
+    z-index: 1000;
+}
+
+.projectLinks a:hover {
+    background-color: var(--green-300);
+    color: var(--dark-grey);
+}
+
+
+.projectCard:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(23, 216, 133, 0.2);
+    border-color: #119c60;
+    background: linear-gradient(45deg,
+            transparent 0%,
+            rgba(23, 216, 133, 0.05) 50%,
+            transparent 100%);
+}
+
+@media (max-width: 768px) {
+    .projectsContainer {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .projectCard {
+        width: 90%;
+        max-width: 400px;
+    }
+}

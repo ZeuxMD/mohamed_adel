@@ -1,9 +1,9 @@
 import styles from "./ShadowButton.module.css";
 
-function ShadowButton({ handleClick }) {
+function ShadowButton({ handleClick, children }) {
   return (
     <button onClick={handleClick} className={styles.button}>
-      See My Work
+      {children}
     </button>
   );
 }

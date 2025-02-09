@@ -1,16 +1,33 @@
 import styles from "./Navbar.module.css";
 import Logo from "../Logo";
+import { useState } from "react";
 
 function Navbar({ refs, handleNavigate }) {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
   const [homeRef, projectsRef, aboutRef, contactRef] = refs;
+
   return (
     <nav className={`${styles.nav} breakout`}>
       <Logo />
-      <ul>
+
+      {/* Hamburger Menu Icon (visible on smaller screens) */}
+      <button className={styles.hamburgerButton} onClick={toggleMenu}>
+        ☰
+      </button>
+
+      <ul className={`${styles.navList} ${isMenuOpen ? styles.active : ""}`}>
         <li>
           <button
             className={`${styles.navBtn} ${styles.active}`}
-            onClick={() => handleNavigate(homeRef)}
+            onClick={() => {
+              handleNavigate(homeRef);
+              setIsMenuOpen(false); // Close the menu
+            }}
           >
             Home
           </button>
@@ -18,7 +35,10 @@ function Navbar({ refs, handleNavigate }) {
         <li>
           <button
             className={styles.navBtn}
-            onClick={() => handleNavigate(projectsRef)}
+            onClick={() => {
+              handleNavigate(projectsRef);
+              setIsMenuOpen(false); // Close the menu
+            }}
           >
             Projects
           </button>
@@ -26,7 +46,10 @@ function Navbar({ refs, handleNavigate }) {
         <li>
           <button
             className={styles.navBtn}
-            onClick={() => handleNavigate(aboutRef)}
+            onClick={() => {
+              handleNavigate(aboutRef);
+              setIsMenuOpen(false); // Close the menu
+            }}
           >
             About me
           </button>
@@ -34,7 +57,10 @@ function Navbar({ refs, handleNavigate }) {
         <li>
           <button
             className={styles.navBtn}
-            onClick={() => handleNavigate(contactRef)}
+            onClick={() => {
+              handleNavigate(contactRef);
+              setIsMenuOpen(false); // Close the menu
+            }}
           >
             Contact
           </button>

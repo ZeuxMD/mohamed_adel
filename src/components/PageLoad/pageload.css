@@ -25,7 +25,7 @@ body {
   align-items: center;
   font-family: "Courier New", Courier, monospace;
   animation: endLoad 2s 5s forwards;
-  z-index: 5;
+  z-index: 1001;
 }
 
 @keyframes endLoad {
