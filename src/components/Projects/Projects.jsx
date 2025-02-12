@@ -5,7 +5,7 @@ const projects = [
         id: 1,
         title: "Qetmeer Farm",
         description: "ECommerce website for selling farm products",
-        imageUrl: "./images/qetmeer.png", // Replace with actual image
+        imageUrl: "https://4swr9auxnu.ufs.sh/f/qomDrNVG6cxz0OrdkPjUwhHlkcWA21BPbDsnfIeFCNgj8ypi", 
         tech: ["Next.js", "Tailwindcss", "Supabase"],
         liveUrl: "https://qetmeer-farm.vercel.app/",
         githubUrl: "https://github.com/MohamedAdelMohamedMetwaley/qetmeer_farm"
@@ -14,7 +14,7 @@ const projects = [
         id: 2,
         title: "ZDrive",
         description: "Minimal Google Drive Clone with t3 Stack, with a database, auth, and analytics. This was done (mostly) following a tutorial from the youtuber Theo - t3.gg",
-        imageUrl: "./images/zdrive.png", // Replace with actual image
+        imageUrl: "https://4swr9auxnu.ufs.sh/f/qomDrNVG6cxzlJvoeBwWEB2s7JPvAVobcO45y8QaK6nFNjS1", 
         tech: ["Next.js", "Typescript", "Tailwindcss", "Clerk", "Singlestore", "Posthog"],
         liveUrl: "https://drive-tutorial-zmd.netlify.app/",
         githubUrl: "https://github.com/MohamedAdelMohamedMetwaley/drive-tutorial"
@@ -23,7 +23,7 @@ const projects = [
         id: 3,
         title: "MemoHadith",
         description: "A simple website that contains a collection of Hadith books to help memorize and read hadith",
-        imageUrl: "./images/memohadith.png", // Replace with actual image
+        imageUrl: "https://4swr9auxnu.ufs.sh/f/qomDrNVG6cxzTxep5lh2OfpYn0KodzCIXH2mSN41lvTqjhLa",
         tech: ["HTML", "CSS", "Javascript"],
         liveUrl: "https://mohamedadelmohamedmetwaley.github.io/memohadith",
         githubUrl: "https://github.com/MohamedAdelMohamedMetwaley/memohadith"

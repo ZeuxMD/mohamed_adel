@@ -17,7 +17,7 @@ function Header({ refProps, projectsRef, handleNavigate }) {
                 </ShadowButton>
             </article>
             <picture className={styles.imageContainer}>
-                <img src="./images/pic.jpg" alt="my-photo" />
+                <img src="https://4swr9auxnu.ufs.sh/f/qomDrNVG6cxzGzW5ic8Uubytx2pV9ZEgzwdO7q5nliB8HeSR" alt="my-photo" />
             </picture>
         </header>
     );

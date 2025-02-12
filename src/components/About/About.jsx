@@ -5,7 +5,7 @@ function About({ refProps }) {
         <section ref={refProps} className={`${styles.about} breakout`}>
             <h2>{"> About Me"}</h2>
             <div className={styles.aboutContent}>
-                <img src="./images/about-me.jpg" alt="About me" className={styles.aboutImage} />
+                <img src="https://4swr9auxnu.ufs.sh/f/qomDrNVG6cxziQjePRkJMbV20oEYr41S8LUg3C9nGdHJwR7a" alt="About me" className={styles.aboutImage} />
                 <div className={styles.aboutText}>
                     <p>
                         Hi, I&apos;m Mohamed, a passionate full-stack developer based in Alexandria, Egypt.
