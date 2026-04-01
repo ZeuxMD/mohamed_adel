@@ -119,7 +119,7 @@ function HeroScene({ pointer }) {
       <div className={styles.sceneWash} />
       {canRenderScene() ? (
         <Canvas
-          camera={{ fov: 32, position: [0, 0, 8] }}
+          camera={{ fov: 35, position: [0, 0, 8.8] }}
           className={styles.canvas}
           dpr={[1, sceneFlags.dprMax]}
           gl={{ alpha: true, antialias: true, powerPreference: "high-performance" }}
