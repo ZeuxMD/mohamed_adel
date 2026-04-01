@@ -1,8 +1,8 @@
 const desktopLayout = {
   next: {
-    hoverRadius: 1.3,
+    hoverRadius: 1.9,
     position: { x: -3.22, y: 1.86, z: -0.7 },
-    scale: 0.38,
+    scale: 0.44,
     drift: { x: 0.2, y: 0.12 },
     bounds: {
       x: [-3.58, -1.88],
@@ -20,10 +20,10 @@ const desktopLayout = {
     },
   },
   tailwind: {
-    hoverRadius: 1.4,
+    hoverRadius: 1.68,
     position: { x: -1.84, y: -1.66, z: -0.94 },
     scale: 0.66,
-    drift: { x: 0.22, y: 0.12 },
+    drift: { x: 0.13, y: 0.07 },
     bounds: {
       x: [-2.24, -1.42],
       y: [-1.94, -1.36],
@@ -43,10 +43,10 @@ const compactSceneLayout = {
     },
   },
   tailwind: {
-    hoverRadius: 1.1,
+    hoverRadius: 1.28,
     position: { x: -1.02, y: -0.94, z: -0.68 },
     scale: 0.48,
-    drift: { x: 0.12, y: 0.08 },
+    drift: { x: 0.07, y: 0.05 },
     bounds: {
       x: [-1.24, -0.72],
       y: [-1.16, -0.76],

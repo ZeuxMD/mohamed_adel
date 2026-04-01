@@ -1,15 +1,17 @@
 const idleMotion = {
-  shineOpacity: 0.03,
-  shineTravel: 0,
-  innerGlow: 0.08,
-  tiltStrength: 0.08,
+  floatAmplitude: 0.08,
+  floatSpeed: 0.76,
+  glow: 0.08,
+  hoverLift: 0,
+  tiltStrength: 0.014,
 };
 
 const hoveredMotion = {
-  shineOpacity: 0.13,
-  shineTravel: 1,
-  innerGlow: 0.18,
-  tiltStrength: 0.14,
+  floatAmplitude: 0.1,
+  floatSpeed: 0.84,
+  glow: 0.14,
+  hoverLift: 0.03,
+  tiltStrength: 0.024,
 };
 
 export function getNextHeroMotion({ hovered }) {

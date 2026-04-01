@@ -35,12 +35,12 @@ describe("heroSceneLayout", () => {
       pointer: { x: 1, y: -1 },
     });
 
-    expect(nextTransform.position.x).toBeGreaterThanOrEqual(-2.58);
+    expect(nextTransform.position.x).toBeGreaterThanOrEqual(-3.58);
     expect(nextTransform.position.x).toBeLessThanOrEqual(-1.88);
     expect(reactTransform.position.x).toBeGreaterThanOrEqual(0.68);
     expect(reactTransform.position.x).toBeLessThanOrEqual(1.34);
-    expect(tailwindTransform.position.x).toBeGreaterThanOrEqual(-1.74);
-    expect(tailwindTransform.position.x).toBeLessThanOrEqual(-0.92);
+    expect(tailwindTransform.position.x).toBeGreaterThanOrEqual(-2.24);
+    expect(tailwindTransform.position.x).toBeLessThanOrEqual(-1.42);
   });
 
   it("keeps the desktop bounds out of the CTA zone", () => {
@@ -60,5 +60,15 @@ describe("heroSceneLayout", () => {
     expect(layout.react.position.x).toBeGreaterThan(0.4);
     expect(layout.tailwind.position.x).toBeLessThan(layout.react.position.x);
     expect(layout.tailwind.position.y).toBeLessThan(layout.react.position.y);
+  });
+
+  it("keeps Tailwind on a tighter pointer leash than the hero focal objects", () => {
+    const desktopLayout = getHeroSceneLayout({ compactLayout: false });
+    const compactLayout = getHeroSceneLayout({ compactLayout: true });
+
+    expect(desktopLayout.tailwind.drift.x).toBeLessThan(desktopLayout.react.drift.x);
+    expect(desktopLayout.tailwind.drift.y).toBeLessThan(desktopLayout.react.drift.y);
+    expect(compactLayout.tailwind.drift.x).toBeLessThan(compactLayout.react.drift.x);
+    expect(compactLayout.tailwind.drift.y).toBeLessThan(compactLayout.react.drift.y);
   });
 });

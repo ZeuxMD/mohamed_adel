@@ -104,7 +104,7 @@ function ReactHeroObject({ compactLayout = false, motionScale = 1, pointer }) {
         }}
       >
         <sphereGeometry args={[layout.hoverRadius, 24, 24]} />
-        <meshBasicMaterial opacity={0} transparent />
+        <meshBasicMaterial depthTest={false} depthWrite={false} opacity={0} transparent />
       </mesh>
 
       <group ref={atomRef}>

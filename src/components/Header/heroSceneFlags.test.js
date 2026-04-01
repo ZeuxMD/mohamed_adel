@@ -12,6 +12,15 @@ describe("getHeroSceneFlags", () => {
     expect(flags.enabledObjects).toEqual(["react", "tailwind"]);
   });
 
+  it("keeps the canvas sharp enough for retina screens when motion is allowed", () => {
+    const flags = getHeroSceneFlags({
+      width: 390,
+      prefersReducedMotion: false,
+    });
+
+    expect(flags.dprMax).toBe(2);
+  });
+
   it("caps motion and dpr when reduced motion is preferred", () => {
     const flags = getHeroSceneFlags({
       width: 1280,

@@ -7,6 +7,6 @@ export function getHeroSceneFlags({ width, prefersReducedMotion }) {
       : ["next", "react", "tailwind"],
     compactLayout: isNarrowMobile,
     motionScale: prefersReducedMotion ? 0.4 : isNarrowMobile ? 0.8 : 1,
-    dprMax: prefersReducedMotion ? 1 : isNarrowMobile ? 1.1 : 1.5,
+    dprMax: prefersReducedMotion ? 1 : 2,
   };
 }
