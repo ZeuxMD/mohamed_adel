@@ -1,17 +1,19 @@
 .contact {
-  padding: clamp(2rem, 6vw, 4rem) 0 4.5rem;
+  padding: 2rem 0 4rem;
+}
+
+.contact > h2 {
+  margin-top: 50px;
+  text-align: center;
 }
 
 .contactShell {
   display: grid;
   gap: 1.75rem;
-  padding: clamp(1.4rem, 3vw, 2.4rem);
-  border-radius: 28px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  background:
-    linear-gradient(180deg, rgba(18, 23, 22, 0.88), rgba(8, 10, 10, 0.9)),
-    rgba(34, 34, 34, 0.78);
-  box-shadow: 0 28px 70px rgba(0, 0, 0, 0.18);
+  max-width: 800px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0;
 }
 
 .contactIntro {
@@ -59,10 +61,10 @@
 
 .field {
   width: 100%;
-  min-height: 3.3rem;
-  border-radius: 18px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  background: rgba(255, 255, 255, 0.03);
+  min-height: 3rem;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: transparent;
   font-family: var(--font);
   letter-spacing: 0.02em;
   padding: 0.95rem 1rem;
@@ -79,7 +81,7 @@
 }
 
 .field:hover {
-  background: rgba(255, 255, 255, 0.045);
+  background: rgba(255, 255, 255, 0.02);
 }
 
 .messageField {
