@@ -1,40 +1,45 @@
 .projects {
-    padding: 2rem;
+    padding: clamp(2rem, 6vw, 4rem) 0;
     text-align: center;
 }
 
 .projectsContainer {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: stretch;
-    gap: 2rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
     margin-top: 20px;
     margin-bottom: 20px;
 }
 
 .projectCard {
-    min-width: 250px;
-    width: 350px;
-    padding: 15px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
+    min-width: 0;
+    padding: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 24px;
     text-align: left;
-    transition: all 0.4s;
-    background-color: #333;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition:
+        transform 180ms ease,
+        box-shadow 180ms ease,
+        border-color 180ms ease,
+        background 180ms ease;
+    background:
+        linear-gradient(180deg, rgba(18, 23, 22, 0.9), rgba(10, 11, 11, 0.92)),
+        #333;
+    box-shadow: 0 18px 42px rgba(0, 0, 0, 0.18);
     color: #fff;
     overflow: hidden;
     display: flex;
     flex-direction: column;
+    min-height: 100%;
 }
 
 .projectCard img {
     width: 100%;
-    height: 200px;
+    aspect-ratio: 16 / 10;
     object-fit: cover;
-    border-radius: 8px;
-    margin-bottom: 10px;
+    border-radius: 18px;
+    margin-bottom: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .descriptionContainer {
@@ -63,48 +68,58 @@
 .techTag {
     font-family: monospace;
     font-size: 0.75rem;
-    padding: 0.25rem 0.5rem;
-    background-color: rgba(23, 216, 133, 0.1);
-    border-radius: 4px;
+    padding: 0.35rem 0.65rem;
+    background-color: rgba(23, 216, 133, 0.12);
+    border-radius: 999px;
+    border: 1px solid rgba(23, 216, 133, 0.08);
+}
+
+.projectLinks {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
 }
 
 .projectLinks a {
-    display: inline-block;
-    margin-right: 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     color: var(--text-color);
     text-decoration: none;
-    padding: 8px 12px;
+    padding: 0.65rem 0.9rem;
     border: 1px solid var(--green-300);
-    border-radius: 5px;
-    background-color: rgba(var(--text-color), 0.1);
-    transition: background-color 0.3s ease;
-    z-index: 1000;
+    border-radius: 999px;
+    background-color: rgba(255, 255, 255, 0.05);
+    transition:
+        background-color 0.3s ease,
+        color 0.3s ease,
+        transform 0.3s ease;
 }
 
 .projectLinks a:hover {
     background-color: var(--green-300);
     color: var(--dark-grey);
+    transform: translateY(-1px);
 }
 
 
 .projectCard:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 20px rgba(23, 216, 133, 0.2);
-    border-color: #119c60;
+    transform: translateY(-6px);
+    box-shadow: 0 24px 50px rgba(0, 0, 0, 0.24);
+    border-color: rgba(23, 216, 133, 0.48);
     background: linear-gradient(45deg,
             transparent 0%,
             rgba(23, 216, 133, 0.05) 50%,
-            transparent 100%);
+            transparent 100%),
+        linear-gradient(180deg, rgba(18, 23, 22, 0.94), rgba(10, 11, 11, 0.96));
 }
 
 @media (max-width: 768px) {
     .projectsContainer {
-        flex-direction: column;
-        align-items: center;
+        grid-template-columns: 1fr;
     }
 
     .projectCard {
-        width: 90%;
-        max-width: 400px;
+        width: 100%;
     }
 }

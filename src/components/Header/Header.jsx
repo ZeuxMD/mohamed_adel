@@ -4,11 +4,27 @@ import {
   isHeroPointerSettled,
   normalizeHeroPointer,
 } from "./heroScenePolicy";
+import { getHeroSceneFlags } from "./heroSceneFlags";
 import ShadowButton from "../ShadowButton/ShadowButton";
 import styles from "./Header.module.css";
 
 const neutralPointer = { x: 0, y: 0 };
 const HeroScene = lazy(() => import("./HeroScene"));
+
+function getShouldRenderInteractiveScene() {
+  if (typeof window === "undefined") {
+    return false;
+  }
+
+  return getHeroSceneFlags({
+    width: window.innerWidth,
+    prefersReducedMotion:
+      window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches ?? false,
+    pointerFine:
+      window.matchMedia?.("(hover: hover) and (pointer: fine)")?.matches ??
+      true,
+  }).renderInteractiveScene;
+}
 
 function HeroSceneFallback() {
   return (
@@ -16,12 +32,31 @@ function HeroSceneFallback() {
       aria-hidden="true"
       className={styles.heroSceneFallback}
       data-testid="hero-scene"
-    />
+    >
+      <span
+        className={`${styles.fallbackBadge} ${styles.fallbackBadgeReact}`}
+      >
+        React
+      </span>
+      <span
+        className={`${styles.fallbackBadge} ${styles.fallbackBadgeNext}`}
+      >
+        Next.js
+      </span>
+      <span
+        className={`${styles.fallbackBadge} ${styles.fallbackBadgeTailwind}`}
+      >
+        Tailwind
+      </span>
+    </div>
   );
 }
 
-function Header({ refProps, projectsRef, handleNavigate }) {
+function Header({ refProps, projectsRef, projectsSectionId, handleNavigate }) {
   const [scenePointer, setScenePointer] = useState(neutralPointer);
+  const [shouldRenderInteractiveScene, setShouldRenderInteractiveScene] = useState(
+    getShouldRenderInteractiveScene,
+  );
   const animationFrameRef = useRef(0);
   const lastFrameTimeRef = useRef(null);
   const pointerTargetRef = useRef(neutralPointer);
@@ -90,6 +125,41 @@ function Header({ refProps, projectsRef, handleNavigate }) {
 
   useEffect(() => () => stopPointerAnimation(), []);
 
+  useEffect(() => {
+    if (typeof window === "undefined" || typeof window.matchMedia !== "function") {
+      return undefined;
+    }
+
+    const reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const finePointerQuery = window.matchMedia("(hover: hover) and (pointer: fine)");
+    const updateSceneAvailability = () => {
+      setShouldRenderInteractiveScene(getShouldRenderInteractiveScene());
+    };
+
+    updateSceneAvailability();
+    window.addEventListener("resize", updateSceneAvailability);
+
+    if (reducedMotionQuery.addEventListener) {
+      reducedMotionQuery.addEventListener("change", updateSceneAvailability);
+      finePointerQuery.addEventListener("change", updateSceneAvailability);
+    } else {
+      reducedMotionQuery.addListener(updateSceneAvailability);
+      finePointerQuery.addListener(updateSceneAvailability);
+    }
+
+    return () => {
+      window.removeEventListener("resize", updateSceneAvailability);
+
+      if (reducedMotionQuery.removeEventListener) {
+        reducedMotionQuery.removeEventListener("change", updateSceneAvailability);
+        finePointerQuery.removeEventListener("change", updateSceneAvailability);
+      } else {
+        reducedMotionQuery.removeListener(updateSceneAvailability);
+        finePointerQuery.removeListener(updateSceneAvailability);
+      }
+    };
+  }, []);
+
   function handlePointerMove(event) {
     updatePointerTarget(
       normalizeHeroPointer(event, event.currentTarget.getBoundingClientRect()),
@@ -102,28 +172,39 @@ function Header({ refProps, projectsRef, handleNavigate }) {
 
   return (
     <header
+      id="home"
       ref={refProps}
       className={`${styles.header} breakout`}
       onPointerMove={handlePointerMove}
       onPointerLeave={handlePointerLeave}
     >
-      <Suspense fallback={<HeroSceneFallback />}>
-        <HeroScene pointer={scenePointer} />
-      </Suspense>
+      {shouldRenderInteractiveScene ? (
+        <Suspense fallback={<HeroSceneFallback />}>
+          <HeroScene pointer={scenePointer} />
+        </Suspense>
+      ) : (
+        <HeroSceneFallback />
+      )}
       <article className={styles.introductionContainer}>
         <h1 className={styles.heroHeading}>I&apos;m Mohamed</h1>
         <p className={styles.heroSubtext}>
           a full-stack web developer, specializing in turning ideas into
           responsive, functional, and engaging websites.
         </p>
-        <ShadowButton handleClick={() => handleNavigate(projectsRef)}>
+        <ShadowButton
+          handleClick={() => handleNavigate(projectsRef, projectsSectionId)}
+        >
           See my work
         </ShadowButton>
       </article>
       <picture className={styles.imageContainer}>
         <img
           src="https://4swr9auxnu.ufs.sh/f/qomDrNVG6cxzGzW5ic8Uubytx2pV9ZEgzwdO7q5nliB8HeSR"
-          alt="my-photo"
+          alt="Portrait of Mohamed Adel"
+          width="640"
+          height="800"
+          decoding="async"
+          loading="eager"
         />
       </picture>
     </header>

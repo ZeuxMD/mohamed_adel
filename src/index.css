@@ -15,11 +15,13 @@
   --btn-text-color: #000;
   --btn-hover-color: var(--green-500);
   --bg-color: var(--dark-grey);
+  --focus-ring: rgba(23, 216, 133, 0.32);
 }
 
 h2 {
-    font-size: 2.5rem;
-    margin-bottom: 50px;
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    margin-bottom: 2rem;
+    letter-spacing: 0.05em;
 }
 
 h2::after {
@@ -60,11 +62,16 @@ h2::after {
     4. Improve text rendering
   */
 body {
-  /* line-height: 1.5; */
   -webkit-font-smoothing: antialiased;
   font-family: var(--font);
-  background-color: var(--bg-color);
+  background:
+    radial-gradient(circle at top, rgba(23, 216, 133, 0.06), transparent 24%),
+    linear-gradient(180deg, #111313 0%, #181818 36%, #111111 100%);
   color: var(--text-color);
+}
+
+html {
+  scroll-behavior: smooth;
 }
 /*
     5. Improve media defaults
@@ -86,6 +93,16 @@ textarea,
 select {
   font: inherit;
 }
+
+a {
+  color: inherit;
+}
+
+:where(button, a, input, textarea, select):focus-visible {
+  outline: 2px solid var(--green-300);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 6px var(--focus-ring);
+}
 /*
     7. Avoid text overflows
   */
@@ -103,6 +120,7 @@ h6 {
   */
 #root {
   isolation: isolate;
+  padding-bottom: 2rem;
 }
 
 .content-grid {

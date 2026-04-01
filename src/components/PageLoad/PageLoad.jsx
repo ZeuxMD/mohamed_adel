@@ -6,10 +6,14 @@ import {
 } from "./pageLoadState";
 import "./pageload.css";
 
-const PAGELOAD_DURATION_MS = 3250;
+const PAGELOAD_DURATION_MS = 1800;
 
 function PageLoad() {
   const [isVisible, setIsVisible] = useState(shouldShowPageLoad);
+
+  function dismissIntro() {
+    setIsVisible(false);
+  }
 
   useEffect(() => {
     if (!isVisible) {
@@ -22,7 +26,18 @@ function PageLoad() {
       setIsVisible(false);
     }, PAGELOAD_DURATION_MS);
 
-    return () => window.clearTimeout(timeoutId);
+    function handleEscape(event) {
+      if (event.key === "Escape") {
+        setIsVisible(false);
+      }
+    }
+
+    window.addEventListener("keydown", handleEscape);
+
+    return () => {
+      window.clearTimeout(timeoutId);
+      window.removeEventListener("keydown", handleEscape);
+    };
   }, [isVisible]);
 
   if (!isVisible) {
@@ -30,17 +45,20 @@ function PageLoad() {
   }
 
   return (
-    <div className="pageload" aria-hidden="true">
+    <div className="pageload">
+      <button type="button" className="pageload__skip" onClick={dismissIntro}>
+        Skip intro
+      </button>
       <div className="pageload__terminal">
         <p className="pageload__command">
           <span className="pageload__prompt">{">"}</span>
-          <span className="pageload__typed">npm run awesomeness</span>
+          <span className="pageload__typed">deploy portfolio --polish</span>
         </p>
 
         <div className="pageload__result">
           <span className="pageload__urlShell">
             <span className="pageload__url">
-              http://localhost:awesome-portfolio/
+              mohamedadel.dev
             </span>
             <svg
               className="pageload__clickBurst"

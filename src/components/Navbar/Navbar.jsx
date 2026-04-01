@@ -1,70 +1,88 @@
 import styles from "./Navbar.module.css";
 import Logo from "../Logo";
-import { useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 
-function Navbar({ refs, handleNavigate }) {
+function Navbar({ activeSection, handleNavigate, sections }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const navId = useId();
+  const navRef = useRef(null);
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
+  useEffect(() => {
+    if (!isMenuOpen) {
+      return undefined;
+    }
 
-  const [homeRef, projectsRef, aboutRef, contactRef] = refs;
+    function handleEscape(event) {
+      if (event.key === "Escape") {
+        setIsMenuOpen(false);
+      }
+    }
+
+    function handleOutsidePointerDown(event) {
+      if (!navRef.current?.contains(event.target)) {
+        setIsMenuOpen(false);
+      }
+    }
+
+    window.addEventListener("keydown", handleEscape);
+    window.addEventListener("pointerdown", handleOutsidePointerDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleEscape);
+      window.removeEventListener("pointerdown", handleOutsidePointerDown);
+    };
+  }, [isMenuOpen]);
+
+  function toggleMenu() {
+    setIsMenuOpen((currentValue) => !currentValue);
+  }
 
   return (
-    <nav className={`${styles.nav} breakout`}>
-      <Logo />
+    <nav ref={navRef} className={`${styles.nav} breakout`}>
+      <button
+        type="button"
+        className={styles.logoButton}
+        onClick={() => {
+          handleNavigate(sections[0].ref, sections[0].id);
+          setIsMenuOpen(false);
+        }}
+        aria-label="Go to home section"
+      >
+        <Logo />
+      </button>
 
-      {/* Hamburger Menu Icon (visible on smaller screens) */}
-      <button className={styles.hamburgerButton} onClick={toggleMenu}>
+      <button
+        type="button"
+        className={styles.hamburgerButton}
+        onClick={toggleMenu}
+        aria-expanded={isMenuOpen}
+        aria-controls={navId}
+        aria-label={isMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+      >
         ☰
       </button>
 
-      <ul className={`${styles.navList} ${isMenuOpen ? styles.active : ""}`}>
-        <li>
-          <button
-            className={`${styles.navBtn} ${styles.active}`}
-            onClick={() => {
-              handleNavigate(homeRef);
-              setIsMenuOpen(false); // Close the menu
-            }}
-          >
-            Home
-          </button>
-        </li>
-        <li>
-          <button
-            className={styles.navBtn}
-            onClick={() => {
-              handleNavigate(projectsRef);
-              setIsMenuOpen(false); // Close the menu
-            }}
-          >
-            Projects
-          </button>
-        </li>
-        <li>
-          <button
-            className={styles.navBtn}
-            onClick={() => {
-              handleNavigate(aboutRef);
-              setIsMenuOpen(false); // Close the menu
-            }}
-          >
-            About me
-          </button>
-        </li>
-        <li>
-          <button
-            className={styles.navBtn}
-            onClick={() => {
-              handleNavigate(contactRef);
-              setIsMenuOpen(false); // Close the menu
-            }}
-          >
-            Contact
-          </button>
-        </li>
+      <ul
+        id={navId}
+        className={`${styles.navList} ${isMenuOpen ? styles.active : ""}`}
+      >
+        {sections.map((section) => (
+          <li key={section.id}>
+            <button
+              type="button"
+              className={`${styles.navBtn} ${
+                activeSection === section.id ? styles.navBtnActive : ""
+              }`}
+              onClick={() => {
+                handleNavigate(section.ref, section.id);
+                setIsMenuOpen(false);
+              }}
+              data-active={activeSection === section.id}
+            >
+              {section.label}
+            </button>
+          </li>
+        ))}
       </ul>
     </nav>
   );

@@ -38,9 +38,57 @@
 
 .heroSceneFallback {
   position: absolute;
-  inset: 0;
+  inset: 0.4rem 0;
   z-index: 1;
   pointer-events: none;
+  overflow: hidden;
+}
+
+.heroSceneFallback::before {
+  content: "";
+  position: absolute;
+  inset: 5% 8%;
+  border-radius: 32px;
+  background:
+    radial-gradient(circle at 24% 28%, rgba(97, 218, 251, 0.12), transparent 20%),
+    radial-gradient(circle at 70% 24%, rgba(255, 255, 255, 0.06), transparent 18%),
+    radial-gradient(circle at 60% 72%, rgba(75, 232, 231, 0.1), transparent 22%);
+  filter: blur(36px);
+  opacity: 0.65;
+}
+
+.fallbackBadge {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 7rem;
+  padding: 0.75rem 1rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(9, 11, 11, 0.5);
+  backdrop-filter: blur(18px);
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  box-shadow: 0 18px 36px rgba(0, 0, 0, 0.18);
+}
+
+.fallbackBadgeReact {
+  top: 18%;
+  left: 50%;
+  transform: translateX(-12%);
+}
+
+.fallbackBadgeNext {
+  top: 12%;
+  left: 8%;
+}
+
+.fallbackBadgeTailwind {
+  right: 12%;
+  bottom: 16%;
 }
 
 .introductionContainer {
@@ -72,6 +120,9 @@
 }
 
 .imageContainer > img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
   border-radius: 22px;
   border: 1px solid rgba(255, 255, 255, 0.08);
   box-shadow:
@@ -89,6 +140,25 @@
     padding: 20px 20px 40px;
   }
 
+  .heroSceneFallback {
+    inset: 0;
+  }
+
+  .fallbackBadgeReact {
+    top: 16%;
+    left: 56%;
+  }
+
+  .fallbackBadgeNext {
+    top: 10%;
+    left: 2%;
+  }
+
+  .fallbackBadgeTailwind {
+    right: 4%;
+    bottom: 22%;
+  }
+
   .introductionContainer {
     width: 100%;
     height: auto;
@@ -101,6 +171,7 @@
 
   .heroSubtext {
     max-width: 100%;
+    margin-inline: auto;
   }
 
   .imageContainer {
@@ -112,6 +183,12 @@
 @media (max-width: 480px) {
   .header {
     min-height: 80vh;
+  }
+
+  .fallbackBadge {
+    min-width: 0;
+    padding: 0.65rem 0.8rem;
+    font-size: 0.68rem;
   }
 
   .imageContainer {

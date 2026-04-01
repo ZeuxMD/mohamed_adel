@@ -19,7 +19,9 @@ describe("Header", () => {
     expect(
       screen.getByRole("button", { name: "See my work" }),
     ).toBeInTheDocument();
-    expect(screen.getByAltText("my-photo")).toBeInTheDocument();
+    expect(
+      screen.getByAltText("Portrait of Mohamed Adel"),
+    ).toBeInTheDocument();
     expect(screen.getByTestId("hero-scene")).toBeInTheDocument();
   });
 });

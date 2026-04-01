@@ -14,11 +14,13 @@ describe("getHeroSceneFlags", () => {
 
   it("keeps the canvas sharp enough for retina screens when motion is allowed", () => {
     const flags = getHeroSceneFlags({
-      width: 390,
+      width: 1280,
       prefersReducedMotion: false,
+      pointerFine: true,
     });
 
-    expect(flags.dprMax).toBe(2);
+    expect(flags.dprMax).toBe(1.5);
+    expect(flags.renderInteractiveScene).toBe(true);
   });
 
   it("caps motion and dpr when reduced motion is preferred", () => {
@@ -27,7 +29,18 @@ describe("getHeroSceneFlags", () => {
       prefersReducedMotion: true,
     });
 
-    expect(flags.motionScale).toBeLessThan(1);
+    expect(flags.motionScale).toBe(0);
     expect(flags.dprMax).toBe(1);
+    expect(flags.renderInteractiveScene).toBe(false);
+  });
+
+  it("uses the static fallback on coarse pointers and smaller viewports", () => {
+    const flags = getHeroSceneFlags({
+      width: 900,
+      prefersReducedMotion: false,
+      pointerFine: false,
+    });
+
+    expect(flags.renderInteractiveScene).toBe(false);
   });
 });

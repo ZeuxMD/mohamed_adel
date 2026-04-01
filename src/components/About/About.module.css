@@ -1,21 +1,31 @@
 .about {
-    padding: 2rem;
+    padding: clamp(2rem, 6vw, 4rem) 0;
     text-align: center;
 }
 
 .aboutContent {
-    display: flex;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: minmax(240px, 300px) minmax(0, 1fr);
     align-items: center;
     gap: 3rem;
+    text-align: left;
+    padding: clamp(1.4rem, 3vw, 2.4rem);
+    border-radius: 28px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background:
+        linear-gradient(180deg, rgba(18, 23, 22, 0.88), rgba(8, 10, 10, 0.9)),
+        rgba(34, 34, 34, 0.78);
+    box-shadow: 0 28px 70px rgba(0, 0, 0, 0.18);
     text-align: left;
 }
 
 .aboutImage {
-    width: 300px;
-    max-height: 350px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    border-radius: 22px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.22);
+    border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .aboutText {
@@ -25,6 +35,7 @@
 .aboutText p {
     margin-bottom: 1rem;
     color: var(--subtext-color);
+    font-family: "Trebuchet MS", "Segoe UI", sans-serif;
 }
 
 .skillsList {
@@ -38,23 +49,22 @@
 .skillsList li {
     color: var(--text-color);
     font-size: var(--font-m);
-    padding: 0.5rem 1rem;
-    border-radius: 5px;
+    padding: 0.45rem 0.9rem;
+    border-radius: 999px;
     font-family: monospace;
-    background-color: rgba(23, 216, 133, 0.1);
-    background-color: #444;
+    background-color: rgba(23, 216, 133, 0.12);
+    border: 1px solid rgba(23, 216, 133, 0.08);
 }
 
 @media (max-width: 768px) {
     .aboutContent {
-        flex-direction: column;
+        grid-template-columns: 1fr;
         align-items: center;
+        gap: 1.75rem;
     }
 
     .aboutImage {
-        width: 80%;
-        max-width: 400px;
-        margin-bottom: 1rem;
+        width: min(80%, 320px);
     }
 
     .aboutText {

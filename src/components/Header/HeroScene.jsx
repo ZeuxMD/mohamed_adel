@@ -17,13 +17,20 @@ function canRenderScene() {
 
 function getInitialSceneFlags() {
   if (typeof window === "undefined") {
-    return getHeroSceneFlags({ width: 1280, prefersReducedMotion: false });
+    return getHeroSceneFlags({
+      width: 1280,
+      prefersReducedMotion: false,
+      pointerFine: true,
+    });
   }
 
   return getHeroSceneFlags({
     width: window.innerWidth,
     prefersReducedMotion: window.matchMedia?.("(prefers-reduced-motion: reduce)")
       ?.matches ?? false,
+    pointerFine:
+      window.matchMedia?.("(hover: hover) and (pointer: fine)")?.matches ??
+      true,
   });
 }
 
@@ -76,6 +83,9 @@ function HeroScene({ pointer }) {
         getHeroSceneFlags({
           width: window.innerWidth,
           prefersReducedMotion: mediaQuery.matches,
+          pointerFine:
+            window.matchMedia?.("(hover: hover) and (pointer: fine)")?.matches ??
+            true,
         }),
       );
     };
