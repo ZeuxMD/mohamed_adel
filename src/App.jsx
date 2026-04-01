@@ -4,7 +4,6 @@ import About from "./components/About/About";
 import Contact from "./components/Contact/Contact";
 import Navbar from "./components/Navbar/Navbar";
 import PageLoad from "./components/PageLoad/PageLoad";
-import FloatingSVGS from "./components/FloatingSVGS/FloatingSVGS";
 import { useRef } from "react";
 
 function App() {
@@ -20,7 +19,6 @@ function App() {
   return (
     <>
       <PageLoad />
-      <FloatingSVGS />
       <Navbar
         refs={[homeRef, projectsRef, aboutRef, contactRef]}
         handleNavigate={handleNavigate}
