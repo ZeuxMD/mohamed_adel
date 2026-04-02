@@ -55,16 +55,20 @@ function SceneContents({ pointer, sceneFlags }) {
           pointer={pointer}
         />
       ) : null}
-      <ReactHeroObject
-        compactLayout={compactLayout}
-        motionScale={motionScale}
-        pointer={pointer}
-      />
-      <TailwindHeroObject
-        compactLayout={compactLayout}
-        motionScale={motionScale}
-        pointer={pointer}
-      />
+      {enabledObjects.includes("react") ? (
+        <ReactHeroObject
+          compactLayout={compactLayout}
+          motionScale={motionScale}
+          pointer={pointer}
+        />
+      ) : null}
+      {enabledObjects.includes("tailwind") ? (
+        <TailwindHeroObject
+          compactLayout={compactLayout}
+          motionScale={motionScale}
+          pointer={pointer}
+        />
+      ) : null}
     </>
   );
 }

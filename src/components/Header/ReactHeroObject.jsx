@@ -92,6 +92,7 @@ function ReactHeroObject({ compactLayout = false, motionScale = 1, pointer }) {
 
   return (
     <group
+      name="react-hero-visual"
       ref={groupRef}
       position={[layout.position.x, layout.position.y, layout.position.z]}
       scale={layout.scale}

@@ -33,23 +33,13 @@ const desktopLayout = {
 
 const compactSceneLayout = {
   react: {
-    hoverRadius: 1.2,
-    position: { x: 1.24, y: 0.04, z: 0.06 },
-    scale: 0.58,
-    drift: { x: 0.12, y: 0.08 },
+    hoverRadius: 1.12,
+    position: { x: -1.02, y: 0.68, z: 0.06 },
+    scale: 0.54,
+    drift: { x: 0.08, y: 0.06 },
     bounds: {
-      x: [0.92, 1.56],
-      y: [-0.08, 0.24],
-    },
-  },
-  tailwind: {
-    hoverRadius: 1.28,
-    position: { x: -1.02, y: -0.94, z: -0.68 },
-    scale: 0.48,
-    drift: { x: 0.07, y: 0.05 },
-    bounds: {
-      x: [-1.24, -0.72],
-      y: [-1.16, -0.76],
+      x: [-1.24, -0.78],
+      y: [0.5, 0.86],
     },
   },
 };

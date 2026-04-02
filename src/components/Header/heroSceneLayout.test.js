@@ -53,22 +53,21 @@ describe("heroSceneLayout", () => {
     expect(layout.tailwind.bounds.y[1]).toBeLessThan(-1.3);
   });
 
-  it("keeps the compact layout centered after removing Next.js", () => {
+  it("keeps the compact layout focused on a single React object in the left CTA lane", () => {
     const layout = getHeroSceneLayout({ compactLayout: true });
 
     expect(layout.next).toBeUndefined();
-    expect(layout.react.position.x).toBeGreaterThan(0.4);
-    expect(layout.tailwind.position.x).toBeLessThan(layout.react.position.x);
-    expect(layout.tailwind.position.y).toBeLessThan(layout.react.position.y);
+    expect(layout.tailwind).toBeUndefined();
+    expect(layout.react.position.x).toBeLessThan(-0.7);
+    expect(layout.react.position.y).toBeGreaterThan(0.5);
+    expect(layout.react.bounds.x[1]).toBeLessThan(-0.7);
+    expect(layout.react.bounds.y[0]).toBeGreaterThanOrEqual(0.5);
   });
 
-  it("keeps Tailwind on a tighter pointer leash than the hero focal objects", () => {
+  it("keeps Tailwind on a tighter pointer leash than React in the desktop scene", () => {
     const desktopLayout = getHeroSceneLayout({ compactLayout: false });
-    const compactLayout = getHeroSceneLayout({ compactLayout: true });
 
     expect(desktopLayout.tailwind.drift.x).toBeLessThan(desktopLayout.react.drift.x);
     expect(desktopLayout.tailwind.drift.y).toBeLessThan(desktopLayout.react.drift.y);
-    expect(compactLayout.tailwind.drift.x).toBeLessThan(compactLayout.react.drift.x);
-    expect(compactLayout.tailwind.drift.y).toBeLessThan(compactLayout.react.drift.y);
   });
 });
