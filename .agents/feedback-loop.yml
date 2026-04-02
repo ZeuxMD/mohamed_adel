@@ -6,26 +6,26 @@ project:
   dominant_ecosystem: javascript
   repo_topology: single-repo
   template:
-    stack: repo-local-react-vite-spa
-    feedback_loop: repo-local-react-vite-strict
+    stack: vite-react-ts-pnpm
+    feedback_loop: vite-react-ts-pnpm-strict
   rationale:
-    - Preserve the existing React and Vite application shape instead of forcing a Python-oriented Guardian template.
-    - Keep the feedback loop explicit for agents with deterministic local commands, CI, and architecture checks.
-    - Protect the pure hero-scene policy modules so changes stay cheap to test and review.
+    - Use the official Guardian Vite, React, and pnpm template family as the closest approved fit for this client-side web app.
+    - Keep the feedback loop explicit for agents with deterministic local commands, CI, build validation, and architecture checks.
+    - Adopt the TypeScript-oriented template in phases while the repo remains JavaScript with checkJs and targeted type coverage.
 maturity:
-  current: vibes
-  target: architecture-as-code
+  current: architecture-as-code
+  target: self-tightening-loop
 toolchain:
   verified_on: "2026-04-02"
   strategy: latest-stable-before-approval
   runtime:
-    name: node
+    name: nodejs
     version: "24.14.1"
     source: https://nodejs.org/dist/index.json
   tools:
     - name: pnpm
       purpose: package-manager
-      version: "10.31.0"
+      version: "10.33.0"
       source: https://www.npmjs.com/package/pnpm
       rationale: Match the repo lockfile and packageManager field for deterministic installs.
     - name: prettier
@@ -45,42 +45,51 @@ toolchain:
       rationale: Run a low-noise JS typecheck over the repo-owned architecture tests and pure helper modules.
     - name: vitest
       purpose: test
-      version: "2.1.9"
+      version: "4.1.2"
       source: https://www.npmjs.com/package/vitest
       rationale: Reuse the existing test harness and extend it with architecture checks.
+    - name: vite
+      purpose: build
+      version: "8.0.3"
+      source: https://www.npmjs.com/package/vite
+      rationale: Keep the production client bundle as a required quality gate for this Vite app.
 approval:
   status: partial
   approved_on: "2026-04-02"
   approved_scope:
-    - bootstrap-contract
+    - approved-template-selection
     - deterministic-scripts
     - prettier-formatting
     - js-typecheck
     - architecture-guardrails
     - ci
-  notes: "Guardian catalog gap on 2026-04-02: the only curated templates available locally are python-cli and python-cli-strict, so this repo uses explicit repo-local overlay identifiers until a human-approved browser-first template exists."
+    - build-gate
+    - safe-toolchain-ratchet
+  notes: "Guardian catalog updated on 2026-04-02 with vite-react-ts-pnpm and vite-react-ts-pnpm-strict. This repo is a credible phased fit: it matches Vite, React, and pnpm assumptions, but it still uses JavaScript plus checkJs instead of the template's full TypeScript scaffold. guardian toolchain verify now works for nodejs contracts; safe ratchets were applied for pnpm 10.33.0, Vitest 4.1.2, and Vite 8.0.3, while ESLint 10 remains deferred until the current React lint plugins publish explicit peer support."
 commands:
-  install: pnpm install --frozen-lockfile
-  format: pnpm format
-  lint: pnpm lint
-  typecheck: pnpm typecheck
-  test: pnpm test
-  check: pnpm check
+  install: make install
+  format: make format
+  lint: make lint
+  typecheck: make typecheck
+  test: make test
+  check: make check
 gates:
   local:
     - format-check
     - lint
     - typecheck
     - test
+    - build
   ci:
     - format-check
     - lint
     - typecheck
     - test
+    - build
 architecture:
   boundaries:
-    - id: react-dom-entrypoint-only
-      rule: Keep react-dom/client imports in src/main.jsx only.
+    - id: bootstrap-is-thin
+      rule: Keep react-dom/client imports in src/main.jsx only and move app logic below the bootstrap entrypoint.
       enforcement: src/architecture/runtimeBoundary.test.js
     - id: hero-policy-modules-stay-pure
       rule: Keep hero scene policy, layout, flag, and motion modules free of React and @react-three/fiber imports.
@@ -92,15 +101,17 @@ architecture:
 phases:
   - phase_id: bootstrap
     status: applied
-    summary: Persist the contract, add deterministic package scripts, scope formatting to the maintenance layer, add CI, and make JS typecheck pass.
+    summary: Adopt the official Guardian Vite and React template family, add a Makefile command surface, scope formatting to the maintenance layer, and enforce build, test, and architecture checks.
   - phase_id: ratchet
     status: planned
     summary: Promote repeated review feedback into additional architecture rules after low-noise patterns emerge.
 deferred_rules:
-  - id: guardian-browser-template
-    reason: Wait for a human-approved Guardian template for browser-first React and Vite applications.
-  - id: toolchain-major-upgrades
-    reason: Revisit ESLint 10 and Vitest 4 after a dedicated compatibility pass against the Vite stack.
+  - id: full-typescript-convergence
+    reason: Convert the repo to tsconfig build references, .tsx entrypoints, and a typed app surface before claiming full parity with the TypeScript template scaffold.
+  - id: eslint-10-adoption
+    reason: Revisit ESLint 10 after eslint-plugin-react and eslint-plugin-react-hooks publish explicit peer support for the current major.
+  - id: vite-8-chunking-review
+    reason: Review the larger react-three-fiber production chunk under Rolldown before treating Vite 8 bundle behavior as fully ratcheted.
 promotion_policy:
   repeat_threshold: 2
   require_low_noise: true

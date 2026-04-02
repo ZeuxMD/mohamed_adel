@@ -11,15 +11,17 @@ const contract = readFileSync(contractPath, "utf8");
 describe("feedback loop contract", () => {
   it("tracks the approved quality gates and maturity target", () => {
     expect(contract).toContain("schema_version: 1");
-    expect(contract).toContain("target: architecture-as-code");
-    expect(contract).toContain("check: pnpm check");
-    expect(contract).toContain("typecheck: pnpm typecheck");
+    expect(contract).toContain("target: self-tightening-loop");
+    expect(contract).toContain("check: make check");
+    expect(contract).toContain("typecheck: make typecheck");
     expect(contract).toContain("format-check");
+    expect(contract).toContain("build");
   });
 
-  it("captures the Guardian template gap explicitly", () => {
-    expect(contract).toContain("Guardian catalog gap on 2026-04-02");
-    expect(contract).toContain("stack: repo-local-react-vite-spa");
-    expect(contract).toContain("feedback_loop: repo-local-react-vite-strict");
+  it("captures the approved Guardian template selection and phased fit", () => {
+    expect(contract).toContain("vite-react-ts-pnpm");
+    expect(contract).toContain("vite-react-ts-pnpm-strict");
+    expect(contract).toContain("credible phased fit");
+    expect(contract).toContain("full-typescript-convergence");
   });
 });
