@@ -1,0 +1,115 @@
+schema_version: 1
+project:
+  name: mohamed_portfolio
+  mode: existing
+  archetype: spa
+  dominant_ecosystem: javascript
+  repo_topology: single-repo
+  template:
+    stack: repo-local-react-vite-spa
+    feedback_loop: repo-local-react-vite-strict
+  rationale:
+    - Preserve the existing React and Vite application shape instead of forcing a Python-oriented Guardian template.
+    - Keep the feedback loop explicit for agents with deterministic local commands, CI, and architecture checks.
+    - Protect the pure hero-scene policy modules so changes stay cheap to test and review.
+maturity:
+  current: vibes
+  target: architecture-as-code
+toolchain:
+  verified_on: "2026-04-02"
+  strategy: latest-stable-before-approval
+  runtime:
+    name: node
+    version: "24.14.1"
+    source: https://nodejs.org/dist/index.json
+  tools:
+    - name: pnpm
+      purpose: package-manager
+      version: "10.31.0"
+      source: https://www.npmjs.com/package/pnpm
+      rationale: Match the repo lockfile and packageManager field for deterministic installs.
+    - name: prettier
+      purpose: format
+      version: "3.8.1"
+      source: https://www.npmjs.com/package/prettier
+      rationale: Low-noise formatting for the contract, config, docs, and architecture test surface without reformatting product code.
+    - name: eslint
+      purpose: lint
+      version: "9.39.4"
+      source: https://www.npmjs.com/package/eslint
+      rationale: Preserve the existing lint stack while failing warnings in local and CI gates.
+    - name: typescript
+      purpose: typecheck
+      version: "6.0.2"
+      source: https://www.npmjs.com/package/typescript
+      rationale: Run a low-noise JS typecheck over the repo-owned architecture tests and pure helper modules.
+    - name: vitest
+      purpose: test
+      version: "2.1.9"
+      source: https://www.npmjs.com/package/vitest
+      rationale: Reuse the existing test harness and extend it with architecture checks.
+approval:
+  status: partial
+  approved_on: "2026-04-02"
+  approved_scope:
+    - bootstrap-contract
+    - deterministic-scripts
+    - prettier-formatting
+    - js-typecheck
+    - architecture-guardrails
+    - ci
+  notes: "Guardian catalog gap on 2026-04-02: the only curated templates available locally are python-cli and python-cli-strict, so this repo uses explicit repo-local overlay identifiers until a human-approved browser-first template exists."
+commands:
+  install: pnpm install --frozen-lockfile
+  format: pnpm format
+  lint: pnpm lint
+  typecheck: pnpm typecheck
+  test: pnpm test
+  check: pnpm check
+gates:
+  local:
+    - format-check
+    - lint
+    - typecheck
+    - test
+  ci:
+    - format-check
+    - lint
+    - typecheck
+    - test
+architecture:
+  boundaries:
+    - id: react-dom-entrypoint-only
+      rule: Keep react-dom/client imports in src/main.jsx only.
+      enforcement: src/architecture/runtimeBoundary.test.js
+    - id: hero-policy-modules-stay-pure
+      rule: Keep hero scene policy, layout, flag, and motion modules free of React and @react-three/fiber imports.
+      enforcement: src/architecture/runtimeBoundary.test.js
+  forbidden_patterns:
+    - id: no-hidden-feedback-loop
+      rule: Do not change the canonical quality commands or maturity target without updating .agents/feedback-loop.yml.
+      enforcement: src/architecture/feedbackLoopContract.test.js
+phases:
+  - phase_id: bootstrap
+    status: applied
+    summary: Persist the contract, add deterministic package scripts, scope formatting to the maintenance layer, add CI, and make JS typecheck pass.
+  - phase_id: ratchet
+    status: planned
+    summary: Promote repeated review feedback into additional architecture rules after low-noise patterns emerge.
+deferred_rules:
+  - id: guardian-browser-template
+    reason: Wait for a human-approved Guardian template for browser-first React and Vite applications.
+  - id: toolchain-major-upgrades
+    reason: Revisit ESLint 10 and Vitest 4 after a dedicated compatibility pass against the Vite stack.
+promotion_policy:
+  repeat_threshold: 2
+  require_low_noise: true
+  allowed_targets:
+    - contract
+    - tool-config
+    - custom-test
+    - ci
+    - template-catalog
+drift_policy:
+  source_of_truth: observed-repo-with-contract-reconciliation
+  require_approval: true

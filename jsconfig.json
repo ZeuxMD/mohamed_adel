@@ -1,0 +1,32 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "checkJs": true,
+    "jsx": "react-jsx",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "maxNodeModuleJsDepth": 0,
+    "target": "ES2022",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "noEmit": true,
+    "strict": false,
+    "skipLibCheck": true,
+    "types": [
+      "node",
+      "vite/client",
+      "vitest/globals",
+      "@testing-library/jest-dom"
+    ]
+  },
+  "include": [
+    "src/env.d.ts",
+    "src/architecture/**/*.js",
+    "src/components/Header/heroSceneFlags.js",
+    "src/components/Header/heroSceneLayout.js",
+    "src/components/Header/heroScenePolicy.js",
+    "src/components/Header/nextHeroMotion.js",
+    "src/components/Header/reactHeroMotion.js",
+    "src/components/Header/tailwindHeroMotion.js"
+  ],
+  "exclude": ["node_modules"]
+}
