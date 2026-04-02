@@ -4,6 +4,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding-inline: 10px !important;
   flex-direction: row;
   position: relative;
   overflow: hidden;
@@ -122,11 +123,12 @@
 .imageContainer > img {
   width: 100%;
   height: auto;
-  border-radius: 22px;
+  border-radius: 10px;
   border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow:
-    0 24px 48px rgba(0, 0, 0, 0.28),
-    0 0 0 1px rgba(255, 255, 255, 0.03);
+  /* box-shadow: */
+  /*   0 24px 48px rgba(0, 0, 0, 0.28), */
+  /*   0 0 0 1px rgba(255, 255, 255, 0.03); */
+  box-shadow: 8px 12px 3px rgba(0, 0, 0, 0.5);
   filter: saturate(0.84) contrast(1.01);
   background: rgba(255, 255, 255, 0.04);
   opacity: 0.96;
