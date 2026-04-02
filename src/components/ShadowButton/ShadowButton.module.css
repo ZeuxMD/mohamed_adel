@@ -2,14 +2,32 @@
   background-color: var(--btn-color);
   border: none;
   font-weight: bold;
-  padding: 10px 15px;
+  padding: 0.85rem 1.2rem;
   border-radius: 4px;
   cursor: pointer;
-  box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.5);
-  transition: 0.3s;
+  color: var(--btn-text-color);
+  box-shadow:
+    0 12px 28px rgba(7, 10, 10, 0.24),
+    6px 6px 0 rgba(0, 0, 0, 0.42);
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    background-color 180ms ease,
+    opacity 180ms ease;
 }
 
 .button:hover {
   transform: translate(3px, 3px);
-  box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.5);
+  box-shadow:
+    0 8px 18px rgba(7, 10, 10, 0.18),
+    3px 3px 0 rgba(0, 0, 0, 0.42);
+}
+
+.button:disabled {
+  cursor: progress;
+  opacity: 0.72;
+  transform: none;
+  box-shadow:
+    0 8px 18px rgba(7, 10, 10, 0.18),
+    4px 4px 0 rgba(0, 0, 0, 0.32);
 }

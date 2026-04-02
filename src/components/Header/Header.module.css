@@ -4,40 +4,160 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding-inline: 10px !important;
   flex-direction: row;
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  gap: clamp(2rem, 6vw, 5rem);
+  padding: clamp(1.5rem, 4vw, 3rem) 0 clamp(2.5rem, 6vw, 4.5rem);
+}
+
+.header::before {
+  content: "";
+  position: absolute;
+  inset: -12% -10%;
+  z-index: 0;
+  background:
+    radial-gradient(circle at 71% 42%, rgba(125, 238, 255, 0.04), transparent 24%),
+    radial-gradient(circle at 58% 71%, rgba(75, 232, 231, 0.024), transparent 21%),
+    radial-gradient(circle at 50% 48%, rgba(255, 255, 255, 0.01), transparent 54%);
+  opacity: 0.5;
+  -webkit-mask-image: radial-gradient(
+    ellipse at center,
+    rgba(0, 0, 0, 0.98) 40%,
+    rgba(0, 0, 0, 0.7) 68%,
+    transparent 100%
+  );
+  mask-image: radial-gradient(
+    ellipse at center,
+    rgba(0, 0, 0, 0.98) 40%,
+    rgba(0, 0, 0, 0.7) 68%,
+    transparent 100%
+  );
+}
+
+.heroSceneFallback {
+  position: absolute;
+  inset: 0.4rem 0;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.heroSceneFallback::before {
+  content: "";
+  position: absolute;
+  inset: 5% 8%;
+  border-radius: 32px;
+  background:
+    radial-gradient(circle at 24% 28%, rgba(97, 218, 251, 0.12), transparent 20%),
+    radial-gradient(circle at 70% 24%, rgba(255, 255, 255, 0.06), transparent 18%),
+    radial-gradient(circle at 60% 72%, rgba(75, 232, 231, 0.1), transparent 22%);
+  filter: blur(36px);
+  opacity: 0.65;
+}
+
+.fallbackBadge {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 7rem;
+  padding: 0.75rem 1rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(9, 11, 11, 0.5);
+  backdrop-filter: blur(18px);
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  box-shadow: 0 18px 36px rgba(0, 0, 0, 0.18);
+}
+
+.fallbackBadgeReact {
+  top: 18%;
+  left: 50%;
+  transform: translateX(-12%);
+}
+
+.fallbackBadgeNext {
+  top: 12%;
+  left: 8%;
+}
+
+.fallbackBadgeTailwind {
+  right: 12%;
+  bottom: 16%;
 }
 
 .introductionContainer {
   height: 50%;
-  width: 50%;
+  width: min(47%, 38rem);
+  position: relative;
+  z-index: 2;
 }
 
 .heroHeading {
   font-size: var(--font-xl);
   letter-spacing: 3px;
+  margin-bottom: 0.75rem;
+  text-wrap: balance;
 }
 
 .heroSubtext {
   color: var(--subtext-color);
-  max-width: 75ch;
+  max-width: 58ch;
   margin-bottom: 40px;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+  font-size: clamp(1rem, 1.2vw, 1.125rem);
 }
 
 .imageContainer {
-  width: 30%;
+  width: min(30%, 332px);
+  position: relative;
+  z-index: 2;
 }
 
 .imageContainer > img {
+  width: 100%;
+  height: auto;
   border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  /* box-shadow: */
+  /*   0 24px 48px rgba(0, 0, 0, 0.28), */
+  /*   0 0 0 1px rgba(255, 255, 255, 0.03); */
   box-shadow: 8px 12px 3px rgba(0, 0, 0, 0.5);
+  filter: saturate(0.84) contrast(1.01);
+  background: rgba(255, 255, 255, 0.04);
+  opacity: 0.96;
 }
 
 @media (max-width: 768px) {
   .header {
     flex-direction: column;
     text-align: center;
-    padding: 20px;
+    padding: 20px 20px 40px;
+  }
+
+  .heroSceneFallback {
+    inset: 0;
+  }
+
+  .fallbackBadgeReact {
+    top: 16%;
+    left: 56%;
+  }
+
+  .fallbackBadgeNext {
+    top: 10%;
+    left: 2%;
+  }
+
+  .fallbackBadgeTailwind {
+    right: 4%;
+    bottom: 22%;
   }
 
   .introductionContainer {
@@ -47,24 +167,32 @@
   }
 
   .heroHeading {
-    font-size: var(--font-l); 
+    font-size: var(--font-l);
   }
 
   .heroSubtext {
     max-width: 100%;
+    margin-inline: auto;
   }
 
   .imageContainer {
-    width: 70%; 
-    margin: 0 auto; 
+    width: min(70%, 360px);
+    margin: 0 auto;
   }
 }
 
 @media (max-width: 480px) {
-    .header{
-        min-height: 80vh;
-    }
-    .imageContainer {
-        width: 90%; 
-    }
+  .header {
+    min-height: 80vh;
+  }
+
+  .fallbackBadge {
+    min-width: 0;
+    padding: 0.65rem 0.8rem;
+    font-size: 0.68rem;
+  }
+
+  .imageContainer {
+    width: 90%;
+  }
 }

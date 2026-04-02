@@ -1,0 +1,114 @@
+.contact {
+  padding: 2rem 0 4rem;
+}
+
+.contact > h2 {
+  margin-top: 50px;
+  text-align: center;
+}
+
+.contactShell {
+  display: grid;
+  gap: 1.75rem;
+  max-width: 800px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0;
+}
+
+.contactIntro {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.75rem 1.5rem;
+  align-items: baseline;
+}
+
+.contactIntro p {
+  max-width: 48ch;
+  color: var(--subtext-color);
+  font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+}
+
+.directLink {
+  color: var(--green-300);
+  text-decoration: none;
+  font-size: 0.95rem;
+}
+
+.form {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.inputBox {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.inputBox label {
+  color: var(--text-color);
+  font-size: 0.95rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.field {
+  width: 100%;
+  min-height: 3rem;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: transparent;
+  font-family: var(--font);
+  letter-spacing: 0.02em;
+  padding: 0.95rem 1rem;
+  font-size: 1rem;
+  color: var(--text-color);
+  transition:
+    border-color 180ms ease,
+    background-color 180ms ease,
+    transform 180ms ease;
+}
+
+.field::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.field:hover {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.messageField {
+  min-height: 10rem;
+  resize: vertical;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 0.25rem;
+}
+
+@media (max-width: 768px) {
+  .contactShell {
+    border-radius: 22px;
+  }
+
+  .row {
+    grid-template-columns: 1fr;
+  }
+
+  .actions {
+    justify-content: stretch;
+  }
+
+  .actions > button {
+    width: 100%;
+  }
+}
